@@ -3,11 +3,11 @@ import getQueryClient from "@/utils/GetQueryClient"
 import { dehydrate, useQuery } from "@tanstack/react-query"
 
 const useProduct = (id: string) => {
-    const { data, isLoading, isSuccess } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ['Product', id],
         queryFn: () => fetchProductById(id)
     })
-    return { data, isLoading, isSuccess }
+    return { data, isLoading, isError, error }
 }
 
 export const productQueryClient = async (id: string) => {

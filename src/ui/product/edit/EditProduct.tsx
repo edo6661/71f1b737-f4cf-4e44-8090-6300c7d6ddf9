@@ -1,16 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import { editProduct } from "@/api";
 import useProduct from "@/hooks/useProduct";
+import { useContextProvider } from "@/providers/ContextProvider";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormikHelpers } from "formik";
-import { useState } from "react";
-import CommonFormComponent from "../FormProduct";
+import { useEffect, useState } from "react";
+import FormProduct from "../FormProduct";
 import NewProduct from "../NewProduct";
 
 const EditProduct = ({ id }: { id: string }) => {
 
     const [newProducts, setNewProducts] = useState<Product | null>(null);
-    const { data, isLoading, isSuccess } = useProduct(id)
+    const { image, setImage } = useContextProvider()
+    const { data, isLoading, isError, error } = useProduct(id)
+
+    useEffect(() => {
+        if (data?.thumbnail) setImage(data.thumbnail)
+    }, [data?.thumbnail])
 
     const initialValues = {
         title: data?.title ?? '',
@@ -28,14 +35,17 @@ const EditProduct = ({ id }: { id: string }) => {
     const mutation = useMutation({
         mutationFn: (newProduct: Product) => editProduct({ id, newProduct }),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['Product', id] })
-        },
+            queryClient.invalidateQueries({ queryKey: ['Product', id] });
+            queryClient.invalidateQueries({ queryKey: ['Products'] });
+        }
     })
 
 
     const onSubmitFormik = async (values: Product, { resetForm }: FormikHelpers<Product>) => {
+        resetForm()
         try {
-            const result = await mutation.mutateAsync({ ...values });
+            const result = await mutation.mutateAsync({ ...values, thumbnail: URL.createObjectURL(image) });
+            console.log(result)
             setNewProducts(result);
         } catch (error) {
             console.error("Terjadi kesalahan saat melakukan mutasi:", error);
@@ -50,9 +60,8 @@ const EditProduct = ({ id }: { id: string }) => {
     return (
         <article>
             <div>
-                <div className='mt-40' >
-                    <CommonFormComponent initialValues={initialValues} onSubmitFormik={onSubmitFormik} />
-                    {newProducts && <NewProduct cover={data?.thumbnail} {...newProducts} />}
+                <div  >
+                    {!newProducts ? <FormProduct initialValues={initialValues} onSubmitFormik={onSubmitFormik} /> : <NewProduct {...newProducts} />}
                 </div>
             </div>
         </article>

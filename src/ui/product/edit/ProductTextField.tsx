@@ -6,8 +6,8 @@ interface Props {
     placeholder: string;
 }
 
-const TextFieldComponent = ({ name, value, onChange, placeholder }: Props) => (
+const ProductTextField = ({ name, value, onChange, placeholder }: Props) => (
     <input type="text" name={name} value={value} onChange={onChange} placeholder={placeholder} />
 );
 
-export default TextFieldComponent;
+export default ProductTextField;

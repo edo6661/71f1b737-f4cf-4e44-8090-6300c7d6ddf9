@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-responsive-modal/styles.css'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,15 +22,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-
+  console.log(process.env.NODE_ENV)
   return (
 
     <html lang="en">
       <body className={inter.className}>
         <TanstackProvider>
-          <ReactQueryDevtools />
+          <ReactQueryDevtools  />
           <ContextProvider>
-            {< Header />}
+            <Header />
             {children}
           </ContextProvider>
         </TanstackProvider>

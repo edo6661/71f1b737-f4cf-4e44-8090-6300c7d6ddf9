@@ -5,7 +5,6 @@ const Page = () => {
     return (
         <section>
             <AddProduct />
-            <h1>about</h1>
         </section>
     )
 }

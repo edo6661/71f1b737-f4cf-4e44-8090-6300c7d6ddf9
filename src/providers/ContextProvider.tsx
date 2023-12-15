@@ -5,10 +5,10 @@ const Context = createContext({} as ContextType)
 
 const ContextProvider = ({ children }: ChildrenType) => {
 
-    const [test] = useState("test")
+    const [image, setImage] = useState('')
 
     return (
-        <Context.Provider value={{ test }}>
+        <Context.Provider value={{ image, setImage }}>
             {children}
         </Context.Provider>
     )

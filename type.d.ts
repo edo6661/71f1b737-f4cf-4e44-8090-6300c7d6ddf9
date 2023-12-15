@@ -4,8 +4,11 @@ interface ChildrenType {
 }
 
 // ! Context
+type ImageState<T> = T;
+
 interface ContextType {
-  test: string;
+  image: ImageState;
+  setImage: React.Dispatch<React.SetStateAction<ImageState>>;
 }
 
 interface Product {

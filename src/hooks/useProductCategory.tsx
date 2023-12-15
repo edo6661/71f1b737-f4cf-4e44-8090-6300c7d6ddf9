@@ -4,11 +4,11 @@ import getQueryClient from "@/utils/GetQueryClient";
 import { dehydrate, useQuery } from "@tanstack/react-query";
 
 const useProductCategory = (category: string) => {
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey: ['Category', category],
         queryFn: () => fetchProductByCategory(category),
     })
-    return { data, isLoading }
+    return { data, isLoading, isError, error }
 }
 
 export const categoryQueryClient = async (category: string) => {

@@ -6,8 +6,6 @@ const Search = () => {
 
     const searchParams = useSearchParams()
 
-    console.log(searchParams.get('query'))
-
     return (
         <section>
             <h1>search page</h1>

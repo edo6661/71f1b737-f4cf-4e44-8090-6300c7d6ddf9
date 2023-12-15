@@ -1,4 +1,3 @@
-'use client'
 import HydratedProduct from '@/ui/product/HydratedProduct';
 
 const EditProduct = ({ params }: { params: { id: string } }) => {

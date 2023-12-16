@@ -1,6 +1,6 @@
 import { deleteProduct } from '@/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Button from '../styles/Button';
 import DeleteConfirmationModal from './ModalDelete';
@@ -15,6 +15,9 @@ const ProductActions: React.FC<ProductActionsProps> = ({ productPath, id }) => {
 
     const [result, setResult] = useState<ProductWithDeletion>()
     const router = useRouter()
+    const path = usePathname()
+
+    const editPath = path.includes('/edit')
 
 
     const handleEdit = () => {
@@ -27,6 +30,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ productPath, id }) => {
             setOpen(false)
             setOpenSecond(true)
             setResult(result)
+            router.push('/products')
         } catch (err) {
             console.error(err)
         }
@@ -51,18 +55,20 @@ const ProductActions: React.FC<ProductActionsProps> = ({ productPath, id }) => {
 
     const formattedDate = result?.deletedOn ? new Date(result?.deletedOn.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date from api'
 
+    const elementButtons = productPath && (
+        <>
+            {!editPath && <div>
+                <Button onClick={handleEdit} intent="secondary" className="w-full">Edit</Button>
+            </div>}
+            <div>
+                <Button className="w-full rounded-r-xl" onClick={onOpenModal}>Delete</Button>
+            </div>
+        </>
+    )
+
     return (
         <>
-            {productPath && (
-                <>
-                    <div>
-                        <Button onClick={handleEdit} intent="secondary" className="w-full">Edit</Button>
-                    </div>
-                    <div>
-                        <Button className="w-full rounded-r-xl" onClick={onOpenModal}>Delete</Button>
-                    </div>
-                </>
-            )}
+            {elementButtons}
             <div className="col-span-2">
                 <DeleteConfirmationModal
                     open={open}

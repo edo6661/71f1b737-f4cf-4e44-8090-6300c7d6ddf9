@@ -10,7 +10,7 @@ interface Props {
 }
 
 const FormProduct = ({ initialValues, onSubmitFormik }: Props) => {
-    
+
 
     // ! 5 EMBE
     const MAX_SIZE = 5000000;

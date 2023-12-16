@@ -26,7 +26,7 @@ const Products = () => {
         <article>
             <div className="wrapperProduct">
                 {products && products.map((product, i) =>
-                    <SingleProducts key={`${product.id}_${i}`} i={i} {...product} />
+                    <SingleProducts key={`${product.id}_${i}`} {...product} />
                 )}
                 <Button disabled={endSkip} onClick={nextPage} className=" col-span-full w-full rounded-xl">{endSkip ? 'No more data' : 'Show More'}</Button>
             </div>

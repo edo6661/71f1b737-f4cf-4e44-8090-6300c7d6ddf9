@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
-const SingleProducts = ({ title, id, thumbnail, i }: Product & { i: number }) => {
+const SingleProducts = ({ title, id, thumbnail }: Product) => {
 
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true })

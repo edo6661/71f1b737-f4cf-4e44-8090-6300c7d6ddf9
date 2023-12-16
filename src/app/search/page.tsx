@@ -7,8 +7,7 @@ const Search = () => {
     const searchParams = useSearchParams()
 
     return (
-        <section>
-            <h1>search page</h1>
+        <section className="baseContainer">
             <HydratedSearch title={searchParams.get('query') ?? ''} />
         </section>
     )

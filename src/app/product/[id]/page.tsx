@@ -2,7 +2,7 @@ import HydratedProduct from "@/ui/product/HydratedProduct"
 
 const ProductId = ({ params }: { params: { id: string } }) => {
     return (
-        <section>
+        <section className="baseContainer">
             <HydratedProduct id={params.id} />
         </section>
     )

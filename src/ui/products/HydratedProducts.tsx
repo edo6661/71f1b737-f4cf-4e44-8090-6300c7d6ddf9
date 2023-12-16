@@ -1,13 +1,12 @@
-import { productsQueryClient } from "@/hooks/useProducts";
-import { HydrationBoundary } from "@tanstack/react-query";
 import Products from "./Products";
 
-const HydratedProducts = async () => {
 
+const HydratedProducts = () => {
+    // const { skip } = useContextProvider()
     return (
-        <HydrationBoundary state={productsQueryClient()}>
-            <Products />
-        </HydrationBoundary>
+        // <HydrationBoundary state={productsQueryClient(skip)}>
+        <Products />
+        // </HydrationBoundary>
     )
 }
 

@@ -6,7 +6,7 @@ const EditProduct = ({ params }: { params: { id: string } }) => {
 
 
     return (
-        <section>
+        <section className='baseContainer'>
             <HydratedProduct id={id} />
         </section>
     )

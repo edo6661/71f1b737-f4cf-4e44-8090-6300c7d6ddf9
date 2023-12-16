@@ -31,21 +31,25 @@ const UploadFile = ({ data, setFieldValue, errors }: IUploadFile) => {
         if (data.images) setImage(data.images)
     }, [data.images])
 
+    const src = typeof image === 'undefined' ? 'https://i.pinimg.com/564x/c6/65/c5/c665c53e8bdbcfebb1bb4b9536e6f630.jpg' : typeof image === 'object' ? URL.createObjectURL(image) : image
+
     return (
         <div>
-            <input
-                type="file"
-                name="images"
-                id="images"
-                accept="image/png, .svg"
-                onChange={handleChange}
-                className={` ${editPathname && 'hidden'}`}
-            />
+            <div className="relative">
+                <label htmlFor="images">
+                    {<Image width={500} className="addImg" height={500} src={src} alt="Preview" />}
+                    {!image && <p className="warn">Click Me (╰ ‿ ╯)</p>}
+                </label>
+                <input
+                    type="file"
+                    name="images"
+                    id="images"
+                    accept="image/png, .svg"
+                    onChange={handleChange}
+                    className={`hidden`}
+                />
+            </div>
             {errors.images && <span id="error">{errors.images}</span>}
-            
-            {!data.images && image && editPathname && <label htmlFor="images"><Image width={500} height={500} src={image} alt="Preview" /></label>}
-
-            {data.images && <Image width={500} height={500} src={URL.createObjectURL(data.images)} alt="Preview" />}
         </div>
     );
 };

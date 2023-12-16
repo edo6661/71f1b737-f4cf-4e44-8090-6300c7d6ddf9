@@ -1,9 +1,10 @@
 import { axiosAku } from "@/config";
 
 // ! GET
-export const fetchProducts = async (): Promise<Products> => {
+
+export const fetchProducts = async (skip: number): Promise<Products> => {
   try {
-    const { data } = await axiosAku.get("");
+    const { data } = await axiosAku.get(`?limit=20&skip=${skip}`);
     return data;
   } catch (err) {
     console.error(err);
@@ -21,7 +22,7 @@ export const fetchProductById = async (id: string): Promise<Product> => {
   }
 };
 
-export const fetchProductByTitle = async (title: string) => {
+export const fetchProductByTitle = async (title: string): Promise<Products> => {
   try {
     const { data } = await axiosAku.get(`search?q=${title}`);
     return data;

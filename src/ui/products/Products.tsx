@@ -1,28 +1,36 @@
 'use client'
 
 import useProducts from "@/hooks/useProducts";
-import Image from "next/image";
-import Link from 'next/link';
+import { useContextProvider } from "@/providers/ContextProvider";
+import { useEffect, useState } from "react";
+import Button from "../styles/Button";
+import SingleProducts from "./SingleProducts";
 
 const Products = () => {
+    const [products, setProducts] = useState<Product[]>([])
 
-    const { data, isLoading } = useProducts()
+    const { skip, setSkip, } = useContextProvider()
+    const { data, isLoading } = useProducts(skip)
+
+    const nextPage = () => {
+        setSkip(prev => prev + 20)
+    }
+
+    const endSkip = data?.skip === 80
+
+    useEffect(() => {
+        data && setProducts(prev => [...prev, ...data.products])
+    }, [data])
+
     return (
-        <article className="">
-            {isLoading && <p>loading...</p>}
+        <article>
+            <div className="wrapperProduct">
+                {products && products.map((product, i) =>
+                    <SingleProducts key={`${product.id}_${i}`} {...product} />
+                )}
+                <Button disabled={endSkip} onClick={nextPage} className=" col-span-full w-full rounded-xl">{endSkip ? 'No more data' : 'Show More'}</Button>
+            </div>
 
-            {!isLoading && data?.products && data?.products.map(product =>
-                <div key={product.id}>
-                    <div>
-                        <Link href={`product/${product.id}`}>
-                            <Image className="rounded-xl "
-                                width={500} height={300} src={product.thumbnail ?? ''} alt={product.title} />
-
-                        </Link>
-                    </div>
-                    <p>{product.title}</p>
-                </div>
-            )}
         </article>
     )
 }

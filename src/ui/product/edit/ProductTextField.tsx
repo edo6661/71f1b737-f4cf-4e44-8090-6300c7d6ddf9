@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ProductTextField = ({ name, value, onChange, placeholder }: Props) => (
-    <input type="text" name={name} value={value} onChange={onChange} placeholder={placeholder} />
+    <input className="w-full" type="text" name={name} value={value} onChange={onChange} placeholder={placeholder} required />
 );
 
 export default ProductTextField;

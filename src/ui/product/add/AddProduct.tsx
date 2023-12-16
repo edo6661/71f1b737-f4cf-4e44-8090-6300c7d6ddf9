@@ -5,11 +5,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FormikHelpers } from 'formik';
 import { useState } from 'react';
 import FormProduct from '../FormProduct';
-import NewProduct from '../NewProduct';
+import SingleProduct from '../SingleProduct';
 
 const AddProduct = () => {
 
     const [newProducts, setNewProducts] = useState<Product | null>(null);
+    const [imgErr, setImgErr] = useState(false)
 
     const { image } = useContextProvider()
 
@@ -34,17 +35,19 @@ const AddProduct = () => {
     const onSubmitFormik = async (values: Product, { resetForm }: FormikHelpers<Product>) => {
         try {
             const result = await mutation.mutateAsync({ ...values, thumbnail: URL.createObjectURL(image) });
-        console.log(result)
             setNewProducts(result);
+            setImgErr(false)
+            resetForm()
         } catch (error) {
+            setImgErr(true)
             console.error("Terjadi kesalahan saat melakukan mutasi:", error);
         }
-        resetForm()
     };
 
     return (
-        <section>
-            {!newProducts ? <FormProduct initialValues={initialValues} onSubmitFormik={onSubmitFormik} /> : <NewProduct {...newProducts} />}
+        <section className='baseContainer'>
+            {!newProducts ? <FormProduct initialValues={initialValues} onSubmitFormik={onSubmitFormik} /> : <SingleProduct {...newProducts} />}
+            {imgErr && <p className='text-red-500 text-4xl  '>CLICK THE IMAGE (⩺_⩹)</p>}
         </section>
     )
 }

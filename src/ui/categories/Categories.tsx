@@ -1,16 +1,23 @@
 'use client'
-import useCategories from "@/hooks/useCategories"
-import Link from "next/link"
+import { imagesCategories } from "@/app/helpers";
+import useCategories from "@/hooks/useCategories";
+import upperFirst from "@/utils/UpperFirst";
+import Image from 'next/image';
+import Link from "next/link";
 
 const Categories = () => {
 
     const { data } = useCategories()
-    console.log(data)
     return (
-        <article>
+        <article className="scrollerWrapper ">
             {data?.map((cat) => {
                 return (
-                    <Link href={`products/${cat}`} key={cat}>{cat}</Link>
+                    <div key={cat}>
+                        <Link href={`products/${cat}`} key={cat}  >
+                            <Image src={imagesCategories[cat]} alt={cat} width={200} height={78} />
+                            <span >{upperFirst(cat)}</span>
+                        </Link>
+                    </div>
                 )
             })}
         </article>

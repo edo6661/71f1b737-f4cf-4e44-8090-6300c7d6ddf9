@@ -1,3 +1,107 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@layer base {
+  nav,
+  footer {
+    @apply relative bg-main py-4 font-montserrat dark:bg-darkMain;
+  }
+  body {
+    @apply overflow-x-hidden bg-main  text-black dark:bg-black dark:text-white;
+  }
+  main {
+    @apply font-poppins;
+  }
+  img,
+  picture,
+  svg,
+  video {
+    @apply block max-w-full italic;
+  }
+  input,
+  textarea {
+    @apply px-2 py-1 pl-4 font-poppins text-black placeholder:italic;
+  }
+  /* ! utils */
+  .title {
+    @apply pb-4 text-2xl font-semibold;
+  }
+  .hovered {
+    @apply duration-150 ease-in-out hover:opacity-80 hover:shadow-main hover:blur-[.5px] hover:grayscale-[5%];
+  }
+  .baseContainer {
+    @apply mx-auto max-w-7xl;
+  }
+  /* ! nav */
+  .wrapperNav {
+    @apply baseContainer flex items-center justify-between gap-8;
+  }
+  .wrapperNav > div > a {
+    @apply hovered;
+  }
+  .innerNav {
+    @apply flex items-center gap-4;
+  }
+  /* ! scroller */
+  .scrollerContainer {
+    @apply text-black;
+  }
+  .scrollerWrapper {
+    @apply scrollCategories grid grid-flow-col items-center gap-4 overflow-x-auto py-8;
+  }
+  .scrollerWrapper > div > a {
+    @apply hovered grid w-36 grid-cols-1 place-items-center items-center gap-4;
+  }
+  .scrollerWrapper > div > a > span {
+    @apply text-sm font-[500] opacity-90;
+  }
+  .scrollCategories::-webkit-scrollbar {
+    @apply hidden;
+  }
+  /* ! products */
+  .wrapperProduct {
+    @apply grid grid-cols-lg place-items-start  gap-4 align-baseline sm:grid-cols-xl;
+  }
+  .wrapperProduct > div {
+    @apply flex flex-col rounded-xl bg-white pt-4 shadow-main;
+  }
+  .wrapperProduct > div > div {
+    @apply px-8 pb-4 font-semibold text-black;
+  }
+  .wrapperProduct > div > div > span {
+    @apply text-sm text-uniqueWord;
+  }
+  .wrapperProduct > div > a > img {
+    @apply hovered  h-40 w-[436px] rounded-b-xl sm:h-56;
+  }
+  /* ! single product */
+  .wrapperSingleProduct {
+    @apply grid grid-cols-2;
+  }
+  .wrapperSingleProduct > div > img {
+    @apply max-h-[426px] w-full;
+  }
+  .wrapperDetailsSingleProduct {
+    @apply col-span-2 grid grid-cols-2 py-6 pl-4 md:col-span-1;
+  }
+  .wrapperDetailsSingleProduct > div {
+    @apply flex items-center gap-2;
+  }
+  /* ! custom modal */
+  .modal {
+    @apply rounded-xl shadow-main;
+  }
+  /* ! form */
+  .specialLabel {
+    @apply hovered block w-full cursor-pointer bg-tertiary px-4 py-2 text-center text-lg text-white;
+  }
+  .addImg {
+    @apply mx-auto md:h-56 md:w-full;
+  }
+  .warn {
+    @apply absolute left-12 top-0 z-10  bg-main px-2 py-1 text-xl font-semibold text-red-500;
+  }
+}

@@ -23,9 +23,9 @@ const SearchBar = () => {
     }
 
     return (
-        <form action="" onSubmit={onSubmit} onMouseLeave={close}>
+        <form action="clickable" onSubmit={onSubmit} onMouseLeave={close}>
             <motion.div variants={searchVars}
-                className=' w-full absolute z-10 -bottom-9 flex items-center '
+                className=' searchBarNav clickable '
                 initial="initial" animate="animate" exit="exit">
                 <input type="text" className='w-full p-3 ' placeholder='Search...' onChange={(e) => setTitle(e.target.value)} value={title} />
                 <button type="submit" className='absolute right-4 clickable'><GoSearch color="black" size={25} />

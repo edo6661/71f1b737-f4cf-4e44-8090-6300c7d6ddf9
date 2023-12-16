@@ -45,6 +45,9 @@
   .innerNav {
     @apply flex items-center gap-4;
   }
+  .searchBarNav {
+    @apply absolute -bottom-9 z-10 flex w-full items-center;
+  }
   /* ! scroller */
   .scrollerContainer {
     @apply text-black;

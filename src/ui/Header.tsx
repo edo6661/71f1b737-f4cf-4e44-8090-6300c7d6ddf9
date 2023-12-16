@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { SyntheticEvent, useEffect } from 'react';
 import { GoSearch } from "react-icons/go";
 import { IoMdAdd } from "react-icons/io";
 import SearchBar from './search/SearchBar';
@@ -16,11 +16,14 @@ const Header = () => {
     const { isSearch, setIsSearch } = useContextProvider()
 
 
-    const toggleSearch = () => setIsSearch(prev => !prev)
+    const toggleSearch = (e: SyntheticEvent) => {
+        e.stopPropagation;
+        setIsSearch(prev => !prev)
+    }
 
     const rightNavElement = (
         <>
-            <button onClick={toggleSearch}><GoSearch size={25} /></button>
+            <button onClick={toggleSearch} className='clickable'><GoSearch size={25} /></button>
             <Link href={'/addProduct'}>
                 <IoMdAdd size={30} />
             </Link>
@@ -31,6 +34,19 @@ const Header = () => {
         setIsSearch(false)
     }, [pathName])
 
+    useEffect(() => {
+        const closeSearch = (e: MouseEvent) => {
+            if (!(e.target as HTMLButtonElement).closest('.clickable')) {
+                setIsSearch(false);
+            }
+        };
+
+        document.addEventListener('click', closeSearch);
+
+        return () => {
+            document.removeEventListener('click', closeSearch);
+        };
+    }, []);
 
     return (
         <>

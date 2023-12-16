@@ -79,3 +79,33 @@ export const searchVars = {
     right: 100,
   },
 };
+
+export const productsVars = {
+  initial: {
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      damping: 50,
+    },
+  },
+  hovered: {
+    scale: 1.01,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+    exit: {
+      scale: 1.2,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  },
+};

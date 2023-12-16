@@ -1,4 +1,4 @@
-# Tailwind CSS + Axios + Tanstack + Formik + Framer Motion + Next.js + + TypeScript
+# Tailwind CSS + Axios + Tanstack + Formik + Framer Motion + Next.js + Cva + TypeScript
 
 ## API
 
